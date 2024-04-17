@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/fontawesome-free-solid";
-import axios from "axios";
 import "./Task.css";
 
 export const Task = ({ task, onTaskDelete, onTaskEdit, onTaskComplete }) => {
+  // set what visually shows on the screen if a task is completed or not
   const taskStatus = task.completed ? "Completed" : "In Progress";
+  // set default editing state to false so we can later show the editing form when the user clicks edit
   const [editing, setEditing] = useState(false);
+  // by setting editValue to task.title we can show the current tasks title when a user clicks edit
   const [editValue, setEditValue] = useState(task.title);
 
-  const BASE_URL = "https://661ec44116358961cd92c866.mockapi.io/tasks/task";
-
+  // set localstate to the value of what is being typed
+  // we will later send this value up to the parent compoent via the onTaskEdit prop
   const handleEditChange = (event) => {
     const { value } = event.target;
     setEditValue(value);
@@ -30,6 +32,7 @@ export const Task = ({ task, onTaskDelete, onTaskEdit, onTaskComplete }) => {
         <input
           type="checkbox"
           checked={task.completed}
+          // pass event and newTaskData up to the parent component via the onTaskComplete prop
           onChange={(event) =>
             onTaskComplete(event, {
               ...task,
@@ -40,6 +43,7 @@ export const Task = ({ task, onTaskDelete, onTaskEdit, onTaskComplete }) => {
         {editing && (
           <form
             onSubmit={(event) =>
+              // pass event and newTaskData up to the parent component via the onTaskEdit prop
               onTaskEdit(event, {
                 ...task,
                 title: editValue,
