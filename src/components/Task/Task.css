@@ -1,4 +1,15 @@
 button {
   background: none;
   border: none;
+  cursor: pointer;
+}
+
+button,
+input[type="checkbox"] {
+  margin-inline: 16px;
+}
+
+.inner-wrapper {
+  display: flex;
+  justify-content: center;
 }

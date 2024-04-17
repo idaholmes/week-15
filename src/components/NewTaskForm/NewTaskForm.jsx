@@ -3,7 +3,9 @@ import "./NewTaskForm.css";
 
 export const NewTaskForm = ({ onTaskSubmit }) => {
   const [newTask, setNewTask] = useState({
-    task: "",
+    title: "",
+    id: "",
+    completed: false,
   });
 
   const handleChange = (event) => {
@@ -14,17 +16,24 @@ export const NewTaskForm = ({ onTaskSubmit }) => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    onTaskSubmit(newTask);
-    setNewTask({ task: "" });
+    onTaskSubmit({
+      ...newTask,
+      id: Math.floor(Math.random() * 200) + 1,
+    });
+    setNewTask({
+      title: "",
+      id: "",
+      completed: false,
+    });
   };
 
   return (
     <form onSubmit={handleSubmit} className="form">
       <label>
         Task:
-        <textarea name="task" value={newTask.task} onChange={handleChange} />
+        <textarea name="title" value={newTask.title} onChange={handleChange} />
       </label>
       <button type="submit">Submit</button>
     </form>
