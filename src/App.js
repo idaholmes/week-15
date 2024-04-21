@@ -10,7 +10,7 @@ function App() {
   // api url from where we will edit and access our api data
   const BASE_URL = "https://661ec44116358961cd92c866.mockapi.io/tasks/task";
 
-  // GET CRUD Request
+  // Here is an example of a GET CRUD Request requirement
   // gets all tasks from the api
   const fetchTasks = async () => {
     try {
@@ -22,7 +22,7 @@ function App() {
     }
   };
 
-  // POST CRUD request
+  // Here is an example of a POST CRUD request requirement
   // Creates a new task
   const onTaskSubmit = async (newTask) => {
     try {
@@ -34,7 +34,7 @@ function App() {
     }
   };
 
-  // DELETE CRUD Request
+  // Here is an example of a DELETE CRUD Request requirement
   // Deletes a task from the api
   const onTaskDelete = async (id) => {
     try {
@@ -46,7 +46,7 @@ function App() {
     }
   };
 
-  // PUT CRUD Request
+  // Here is an example of a PUT CRUD Request requirement
   // Edits an existing task in the api
   const onTaskEdit = async (event, editedTask) => {
     event.preventDefault();
@@ -60,7 +60,7 @@ function App() {
     }
   };
 
-  // PUT CRUD Request
+  // Another PUT CRUD Request
   // 'Completes' an existing task in the api
   const onTaskComplete = async (event, editedTask) => {
     event.preventDefault();

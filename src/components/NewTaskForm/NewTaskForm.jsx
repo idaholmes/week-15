@@ -2,24 +2,26 @@ import React, { useState } from "react";
 import "./NewTaskForm.css";
 
 export const NewTaskForm = ({ onTaskSubmit }) => {
-  // set newTask to an empty object
+  // set newTask to an empty object on load
   const [newTask, setNewTask] = useState({
     title: "",
     id: "",
     completed: false,
   });
 
+  // function for handling the change event
   const handleChange = (event) => {
-    // decontruct name and value out of event
+    // deconstruct name and value out of event
     const { name, value } = event.target;
 
-    // edit the previous task via callback, and access the key that matches event name, and update its value with the new value
+    // edit the previous task via a callback function, and access the key that matches the event name, and update its value with the new value
     setNewTask((prevTask) => ({
       ...prevTask,
       [name]: value,
     }));
   };
 
+  // function for submitting the task back up to the parent component
   const handleSubmit = async (event) => {
     event.preventDefault();
     // use the spread operator to update the id field with a random id before posting to api / sending to onTaskSubmit function prop
@@ -28,7 +30,7 @@ export const NewTaskForm = ({ onTaskSubmit }) => {
       id: Math.floor(Math.random() * 200) + 1,
     });
 
-    // set newTask back to empty object afterwards to make the form ready for a new task to be submitteds
+    // set newTask back to empty object afterwards to make the form ready for a new task to be submitted
     setNewTask({
       title: "",
       id: "",

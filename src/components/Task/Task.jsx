@@ -11,8 +11,8 @@ export const Task = ({ task, onTaskDelete, onTaskEdit, onTaskComplete }) => {
   // by setting editValue to task.title we can show the current tasks title when a user clicks edit
   const [editValue, setEditValue] = useState(task.title);
 
-  // set localstate to the value of what is being typed
-  // we will later send this value up to the parent compoent via the onTaskEdit prop
+  // set local state to the value of what is being typed with edit handler
+  // we will later send this value up to the parent component via the onTaskEdit prop
   const handleEditChange = (event) => {
     const { value } = event.target;
     setEditValue(value);
@@ -40,15 +40,19 @@ export const Task = ({ task, onTaskDelete, onTaskEdit, onTaskComplete }) => {
             })
           }
         />
+
+        {/* if editing is true, return the edit form component */}
         {editing && (
           <form
-            onSubmit={(event) =>
+            onSubmit={(event) => {
               // pass event and newTaskData up to the parent component via the onTaskEdit prop
               onTaskEdit(event, {
                 ...task,
                 title: editValue,
-              })
-            }
+              });
+              // set editing mode back to false after submitting the edited task so that the form goes away
+              setEditing(false);
+            }}
           >
             <input onChange={handleEditChange} value={editValue} autoFocus />
             <button type="submit">Submit</button>
